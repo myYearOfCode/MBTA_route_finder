@@ -18,8 +18,16 @@ export default class AllLines extends Component {
 			.then(data => {
 				let routes = data.data.map((route, index) => {
 					return (
-						<div key={route.attributes.long_name + index}>
-							{route.attributes.long_name}
+						<div class="row">
+							<div
+								class="leftColumn"
+								key={route.attributes.long_name + index}
+							>
+								{route.attributes.long_name}
+							</div>
+							<div class="rightColumn" key={route.id}>
+								{route.id}
+							</div>
 						</div>
 					);
 				});
