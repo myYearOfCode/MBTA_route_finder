@@ -1,0 +1,13 @@
+.row {
+	display: flex;
+}
+
+.leftColumn {
+	flex: 70%;
+	padding: 4px;
+}
+.rightColumn {
+	flex: 30%;
+	text-align: right;
+	padding: 4px;
+}
