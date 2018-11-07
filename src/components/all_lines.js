@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
+//TODO
+// import colors and display them in the div bkgs
+//set up the divs to be clickable
+//capture the urls for the route schedules
+//have fun
+//learn shit
+
 export default class AllLines extends Component {
 	constructor(props) {
 		super(props);
@@ -11,6 +18,8 @@ export default class AllLines extends Component {
 	}
 
 	componentDidMount() {
+		let fontColor = "";
+		let bkgColor = "";
 		fetch("https://api-v3.mbta.com/routes?")
 			.then(data => {
 				return data.json();
@@ -18,15 +27,33 @@ export default class AllLines extends Component {
 			.then(data => {
 				let routes = data.data.map((route, index) => {
 					return (
-						<div class="row">
+						<div className="row" key={route.attributes.sort_order}>
+							{(bkgColor = "#" + route.attributes.color)}
+							{(fontColor = "#" + route.attributes.text_color)}
 							<div
-								class="leftColumn"
-								key={route.attributes.long_name + index}
+								className="leftColumn"
+								key={route.attributes.long_name}
+								bkgColor={"#" + route.attributes.color}
+								fontColor={"#" + route.attributes.text_color}
+								style={{
+									color: "black",
+									backgroundColor: bkgColor
+								}}
 							>
 								{route.attributes.long_name}
 							</div>
-							<div class="rightColumn" key={route.id}>
-								{route.id}
+							<div
+								className="rightColumn"
+								key={route.id}
+								bkgColor={"#" + route.attributes.color}
+								fontColor={"#" + route.attributes.text_color}
+								style={{
+									color: "black",
+									backgroundColor: bkgColor
+								}}
+							>
+								{console.log(route.attributes.color)}
+								<p>{route.id}</p>
 							</div>
 						</div>
 					);
@@ -74,6 +101,9 @@ export default class AllLines extends Component {
 					value={this.state.stopNum}
 					onChange={event => this.onInputChange(event.target.value)}
 				/>
+				<br />
+				<br />
+				<hr />
 				{this.state.routes}
 				{/*console.log(makeApiCall())*/}
 			</div>
