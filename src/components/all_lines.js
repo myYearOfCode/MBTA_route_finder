@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 
 //TODO
-// import colors and display them in the div bkgs
+// +++import colors and display them in the div bkgs
 //set up the divs to be clickable
 //capture the urls for the route schedules
 //have fun
@@ -17,45 +17,63 @@ export default class AllLines extends Component {
 		};
 	}
 
+	makeUrl(end) {
+		return `https://api-v3.mbta.com${end}`;
+	}
+
 	componentDidMount() {
 		let fontColor = "";
 		let bkgColor = "";
 		fetch("https://api-v3.mbta.com/routes?")
-			.then(data => {
-				return data.json();
+			.then(response => {
+				return response.json();
 			})
-			.then(data => {
-				let routes = data.data.map((route, index) => {
+			.then(response => {
+				let routes = response.data.map((route, index) => {
 					return (
-						<div className="row" key={route.attributes.sort_order}>
-							{(bkgColor = "#" + route.attributes.color)}
-							{(fontColor = "#" + route.attributes.text_color)}
+						<a href={this.makeUrl(route.links.self)}>
 							<div
-								className="leftColumn"
-								key={route.attributes.long_name}
-								bkgColor={"#" + route.attributes.color}
-								fontColor={"#" + route.attributes.text_color}
-								style={{
-									color: "black",
-									backgroundColor: bkgColor
-								}}
+								className="row"
+								key={route.attributes.sort_order}
 							>
-								{route.attributes.long_name}
+								{(bkgColor = "#" + route.attributes.color)}
+								{
+									(fontColor =
+										"#" + route.attributes.text_color)
+								}
+
+								<div
+									className="leftColumn"
+									key={route.attributes.long_name}
+									bkgColor={"#" + route.attributes.color}
+									fontColor={
+										"#" + route.attributes.text_color
+									}
+									style={{
+										color: "black",
+										backgroundColor: bkgColor
+									}}
+								>
+									{route.attributes.long_name}
+								</div>
+								<div
+									className="rightColumn"
+									key={route.id}
+									bkgColor={"#" + route.attributes.color}
+									fontColor={
+										"#" + route.attributes.text_color
+									}
+									style={{
+										color: "black",
+										backgroundColor: bkgColor,
+										fontWeight: "Bold"
+									}}
+								>
+									{console.log(route.attributes.color)}
+									<p>{route.id}</p>
+								</div>
 							</div>
-							<div
-								className="rightColumn"
-								key={route.id}
-								bkgColor={"#" + route.attributes.color}
-								fontColor={"#" + route.attributes.text_color}
-								style={{
-									color: "black",
-									backgroundColor: bkgColor
-								}}
-							>
-								{console.log(route.attributes.color)}
-								<p>{route.id}</p>
-							</div>
-						</div>
+						</a>
 					);
 				});
 				this.setState({ routes: routes });
@@ -63,35 +81,7 @@ export default class AllLines extends Component {
 			});
 	}
 
-	// async makeListOfRoutes() {
-	// 	const getAllRoutes = () => {
-	// 		try {
-	// 			return Axios.get("https://api-v3.mbta.com/routes?");
-	// 		} catch (error) {
-	// 			console.error(error);
-	// 		}
-	// 	};
-	// 	let routeList = [];
-	// 	apiResult = await getAllRoutes(5);
-	// 	for (route in apiResult) {
-	// 		routeList.push([route.attributes.long_name, route.attributes.id]);
-	// 	}
-	// 	console.log(routeList);
-	// }
-
 	render() {
-		{
-			/*const makeApiCall = (stopNum = 70065) => {
-			try {
-				return Axios.get(
-					`https://api-v3.mbta.com/schedules?filter[stop]=${stopNum}`
-				);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		console.log(this.makeListOfRoutes());*/
-		}
 		return (
 			<div className="input-group mb-3">
 				<input
