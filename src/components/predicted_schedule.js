@@ -5,6 +5,14 @@ import Axios from "axios";
 // +++import colors and display them in the div bkgs
 //set up the divs to be clickable
 //capture the urls for the vehicle schedules
+// import all lines, filter by bus / train
+// 1 = subway, 3 = bus "filter%5Broute_type%5D=1"
+// https://api-v3.mbta.com/routes?filter%5Broute_type%5D=1
+//then show the line stops and directions
+// https://api-v3.mbta.com/stops?filter%5Broute%5D=Red
+//then show the predictions for that stop
+//ideally they are all stateless and in the main app
+//reacting to the previous input
 //have fun
 //learn shit
 
@@ -12,7 +20,7 @@ export default class PredictedSchedule extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stopNum: "70065",
+			lines: "",
 			vehicles: ""
 		};
 	}
@@ -24,40 +32,32 @@ export default class PredictedSchedule extends Component {
 	componentDidMount() {
 		let fontColor = "";
 		let bkgColor = "";
-		fetch("https://api-v3.mbta.com/predictions?filter[stop]=70065")
+		fetch("https://api-v3.mbta.com/routes?")
 			.then(response => {
 				return response.json();
 			})
 			.then(response => {
-				let vehicles = response.data.map((vehicle, index) => {
+				let lines = response.data.map((line, index) => {
+					console.log(line.attributes.long_name);
 					return (
-						<a href={this.makeUrl(vehicle.links.self)}>
-							<div className="row" key={vehicle.trip.data.id}>
-								<div
-									className="leftColumn"
-									key={vehicle.attributes.arrival_time}
-								>
-									{vehicle.attributes.arrival_time}
-								</div>
-								<div className="rightColumn" key={vehicle.id}>
-									{console.log(vehicle.attributes.color)}
-									<p>{vehicle.attributes.status}</p>
-								</div>
-							</div>
-						</a>
+						<option value={this.makeUrl(line.links.self)}>
+							{line.attributes.long_name}
+						</option>
 					);
 				});
-				this.setState({ vehicles: vehicles });
-				console.log("state", this.state.vehicles);
+				this.setState({ lines: lines });
+				console.log("state", this.state.lines);
 			});
 	}
 
 	render() {
 		return (
-			<div className="input-group mb-3">
-				{this.state.vehicles}
-				{/*console.log(makeApiCall())*/}
-			</div>
+			<form action="/action_page.php">
+				<select name="lines">{this.state.lines}</select>
+				<br />
+				<br />
+				<input type="submit" />
+			</form>
 		);
 	}
 	onInputChange(stopNum) {
