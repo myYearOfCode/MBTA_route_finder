@@ -12,6 +12,10 @@ let selectLine = line => {
 export default class App extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			line: "",
+			stop: ""
+		};
 	}
 
 	render() {
