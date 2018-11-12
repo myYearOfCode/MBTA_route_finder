@@ -34,19 +34,12 @@ export default class AllLines extends Component {
 						<a href={this.makeUrl(route.links.self)}>
 							<div
 								className="row"
-								key={route.attributes.sort_order}
+								key={route.attributes.sort_order + "C"}
 							>
 								{/*(bkgColor = "#" + route.attributes.color)*/}
-								{/*(fontColor =
-										"#" + route.attributes.text_color)*/}
-
 								<div
-									className="leftColumn"
-									key={route.attributes.long_name}
-									bkgColor={"#" + route.attributes.color}
-									fontColor={
-										"#" + route.attributes.text_color
-									}
+									className="leftColumn rounded-circle"
+									key={route.attributes.sort_order + "L"}
 									style={{
 										color: "black",
 										backgroundColor: (bkgColor =
@@ -56,12 +49,8 @@ export default class AllLines extends Component {
 									{route.attributes.long_name}
 								</div>
 								<div
-									className="rightColumn"
-									key={route.id}
-									bkgColor={"#" + route.attributes.color}
-									fontColor={
-										"#" + route.attributes.text_color
-									}
+									className="rightColumn rounded-circle"
+									key={route.attributes.sort_order + "R"}
 									style={{
 										color: "black",
 										backgroundColor: (bkgColor =

@@ -40,7 +40,10 @@ export default class PredictedSchedule extends Component {
 				let lines = response.data.map((line, index) => {
 					console.log(line.attributes.long_name);
 					return (
-						<option value={this.makeUrl(line.links.self)}>
+						<option
+							value={this.makeUrl(line.links.self)}
+							key={line.attributes.sort_order}
+						>
 							{line.attributes.long_name}
 						</option>
 					);
