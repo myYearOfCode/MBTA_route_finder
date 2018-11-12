@@ -36,11 +36,9 @@ export default class AllLines extends Component {
 								className="row"
 								key={route.attributes.sort_order}
 							>
-								{(bkgColor = "#" + route.attributes.color)}
-								{
-									(fontColor =
-										"#" + route.attributes.text_color)
-								}
+								{/*(bkgColor = "#" + route.attributes.color)*/}
+								{/*(fontColor =
+										"#" + route.attributes.text_color)*/}
 
 								<div
 									className="leftColumn"
@@ -51,7 +49,8 @@ export default class AllLines extends Component {
 									}
 									style={{
 										color: "black",
-										backgroundColor: bkgColor
+										backgroundColor: (bkgColor =
+											"#" + route.attributes.color)
 									}}
 								>
 									{route.attributes.long_name}
@@ -65,7 +64,8 @@ export default class AllLines extends Component {
 									}
 									style={{
 										color: "black",
-										backgroundColor: bkgColor,
+										backgroundColor: (bkgColor =
+											"#" + route.attributes.color),
 										fontWeight: "Bold"
 									}}
 								>
