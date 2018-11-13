@@ -7,6 +7,12 @@ import Axios from "axios";
 //capture the urls for the route schedules
 //have fun
 //learn shit
+// this request filters for red line in the next hour going one way.
+// https://api-v3.mbta.com/schedules?filter[route]=Red&filter[min_time]=21:17&filter[max_time]=22:17&filter[direction_id]=0
+// ?filter[stop]=STOP_ID will show schedules at any given stop
+// https://api-v3.mbta.com/predictions?filter[stop]=STOP_ID will show predictions
+//how to get stop numbers?
+// https://api-v3.mbta.com/stops?filter[route]=Red
 
 export default class AllLines extends Component {
 	constructor(props) {
@@ -22,9 +28,8 @@ export default class AllLines extends Component {
 	}
 
 	componentDidMount() {
-		let fontColor = "";
 		let bkgColor = "";
-		fetch("https://api-v3.mbta.com/routes?")
+		fetch("https://api-v3.mbta.com")
 			.then(response => {
 				return response.json();
 			})
@@ -36,9 +41,8 @@ export default class AllLines extends Component {
 								className="row"
 								key={route.attributes.sort_order + "C"}
 							>
-								{/*(bkgColor = "#" + route.attributes.color)*/}
 								<div
-									className="leftColumn rounded-circle"
+									className="leftColumn"
 									key={route.attributes.sort_order + "L"}
 									style={{
 										color: "black",
@@ -49,7 +53,7 @@ export default class AllLines extends Component {
 									{route.attributes.long_name}
 								</div>
 								<div
-									className="rightColumn rounded-circle"
+									className="rightColumn"
 									key={route.attributes.sort_order + "R"}
 									style={{
 										color: "black",
