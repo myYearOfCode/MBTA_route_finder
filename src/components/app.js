@@ -21,8 +21,12 @@ export default class App extends Component {
 
 	render() {
 		let handleLineSelector = line => {
-			console.log("hello");
+			console.log("Line: " + line);
 			this.setState({ line });
+		};
+		let handleStopSelector = stop => {
+			console.log("Stop: " + stop);
+			this.setState({ stop });
 		};
 
 		return (
@@ -30,7 +34,10 @@ export default class App extends Component {
 				{this.state.line}
 				<LineSelector onLineSelectionChange={handleLineSelector} />
 
-				<AllStops line={this.state.line} />
+				<AllStops
+					line={this.state.line}
+					onStopSelectionChange={handleStopSelector}
+				/>
 			</div>
 		);
 	}
