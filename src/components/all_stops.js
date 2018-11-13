@@ -18,11 +18,11 @@ export default class AllStops extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stops: ""
+			stops: "" //I could just use a var here. idk if there is any +- to
 		};
 	}
 
-	componentDidMount() {
+	componentWillReceiveProps() {
 		fetch(`https://api-v3.mbta.com/stops?filter[route]=${this.props.line}`)
 			.then(response => {
 				return response.json();
@@ -48,9 +48,10 @@ export default class AllStops extends Component {
 			<select
 				name="Stops"
 				onChange={event =>
-					this.props.onLineSelectionChange(event.target.value)
+					this.props.onStopSelectionChange(event.target.value)
 				}
 			>
+				{this.props.line}
 				{this.state.stops}
 			</select>
 		);
