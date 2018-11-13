@@ -22,16 +22,17 @@ export default class LineSelector extends Component {
 
 	render() {
 		return (
-			<select name="Lines">
+			<select
+				name="Lines"
+				onChange={event =>
+					this.props.onLineSelectionChange(event.target.value)
+				}
+			>
 				<option value="Blue">Blue</option>
 				<option value="Green">Green</option>
 				<option value="Orange">Orange</option>
 				<option value="Red">Red</option>
 			</select>
 		);
-	}
-	//How can I handle a change on the input form??
-	onInputChange(stopNum) {
-		console.log(stopNum);
 	}
 }
