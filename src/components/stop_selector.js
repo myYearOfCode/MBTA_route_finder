@@ -14,6 +14,8 @@ import Axios from "axios";
 //how to get stop numbers?
 // https://api-v3.mbta.com/stops?filter[route]=Red
 
+// it doesn't seem like that works. I'm not sure where to get the stop id from
+
 export default class StopSelector extends Component {
 	constructor(props) {
 		super(props);

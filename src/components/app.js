@@ -33,13 +33,13 @@ export default class App extends Component {
 			<div>
 				{this.state.line}
 				<LineSelector onLineSelectionChange={handleLineSelector} />
-
 				<StopSelector
 					line={this.state.line}
 					onStopSelectionChange={handleStopSelector}
-				/>
-
+				/>{" "}
+				{/* I need to return the selected stop ID here*/}
 				<PredictedSchedule />
+				{/* I need to pass the stop id in here*/}
 				<GetSchedule line="Red" stop={stop} />
 			</div>
 		);
