@@ -1,7 +1,7 @@
 //geolocation code from stack overflow
 
 if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+	navigator.geolocation.getCurrentPosition(findClosestStop, errorFunction);
 } else {
 	alert(
 		"It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it."
@@ -16,6 +16,45 @@ function successFunction(position) {
 	var lat = position.coords.latitude;
 	var long = position.coords.longitude;
 	console.log("Your latitude is :" + lat + " and longitude is " + long);
+}
+
+function findClosestStop(position) {
+	var lat = position.coords.latitude;
+	var lon = position.coords.longitude;
+	let mydata = JSON.parse(data);
+	let results = [];
+	for (let i = 0; i < mydata.length; i++) {
+		let stopLat = mydata[i].stop_lat;
+		let stopLon = mydata[i].stop_lon;
+		let badDistance = Math.abs(lat - stopLat) + Math.abs(lon - stopLon);
+		console.log(Math.abs(lat - stopLat) + Math.abs(lon - stopLon));
+		results.push([badDistance, mydata[i].stop_name]);
+	}
+	console.log(results);
+}
+
+function sortInsert(array, newElement) {
+	let sortedArray = [];
+	for (let i = 0; i < array.length; i++) {
+		if (array[i] > newElement) {
+			sortedArray = [...array.slice(0, i), newElement, ...array.slice(i)];
+			return sortedArray;
+		}
+	}
+	array.push(newElement); //element must have been > than biggest element.
+	return array;
+}
+
+function sortInsert(array, newElement) {
+	let sortedArray = [];
+	for (let i = 0; i < array.length; i++) {
+		if (array[i] > newElement) {
+			sortedArray = [...array.slice(0, i), newElement, ...array.slice(i)];
+			return sortedArray;
+		}
+	}
+	array.push(newElement); //element must have been > than biggest element.
+	return array;
 }
 
 //next up would be to iterate through the stops and calculate the closest few stops. I guess that would be the square root of ((lat-lat2)^2 + (lon-lon2)^2)
