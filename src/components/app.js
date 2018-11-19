@@ -17,30 +17,32 @@ export default class App extends Component {
 			line: "Red",
 			stop: ""
 		};
+		this.handleStopSelector = this.handleStopSelector.bind(this);
 	}
 
-	render() {
-		let handleLineSelector = line => {
-			console.log("Line: " + line);
-			this.setState({ line });
-		};
-		let handleStopSelector = stop => {
-			console.log("Stop: " + stop);
-			this.setState({ stop });
-		};
+	handleLineSelector = line => {
+		console.log("Line: " + line);
+		this.setState({ line });
+	};
+	handleStopSelector = stop => {
+		console.log("Stop: " + stop);
+		this.setState({ stop });
+	};
 
+	render() {
 		return (
 			<div>
 				{this.state.line}
-				<LineSelector onLineSelectionChange={handleLineSelector} />
+				<LineSelector onLineSelectionChange={this.handleLineSelector} />
 				<StopSelector
 					line={this.state.line}
-					onStopSelectionChange={handleStopSelector}
-				/>{" "}
+					onStopSelectionChange={this.handleStopSelector}
+				/>
+				{this.state.stop}
 				{/* I need to return the selected stop ID here*/}
 				<PredictedSchedule />
 				{/* I need to pass the stop id in here*/}
-				<GetSchedule line="Red" stop={stop} />
+				{/*<GetSchedule line="Red" stop={this.state.stop} />*/}
 			</div>
 		);
 	}

@@ -24,7 +24,28 @@ export default class StopSelector extends Component {
 		};
 	}
 
-	componentWillReceiveProps() {
+	componentWillMount(props) {
+		fetch(`https://api-v3.mbta.com/stops?filter[route]=${this.props.line}`)
+			.then(response => {
+				return response.json();
+			})
+			.then(response => {
+				let stops = response.data.map(stop => {
+					return (
+						<option
+							value={stop.attributes.name}
+							key={stop.attributes.latitude}
+						>
+							{stop.attributes.name}
+						</option>
+					);
+				});
+				this.setState({ stops: stops });
+				console.log("state", this.response);
+			});
+	}
+
+	componentWillReceiveProps(nextProps) {
 		fetch(`https://api-v3.mbta.com/stops?filter[route]=${this.props.line}`)
 			.then(response => {
 				return response.json();
