@@ -25,45 +25,46 @@ export default class PredictedSchedule extends Component {
 		};
 	}
 
-	makeUrl(end) {
-		return `https://api-v3.mbta.com${end}`;
-	}
-
-	componentDidMount() {
-		let fontColor = "";
-		let bkgColor = "";
-		fetch("https://api-v3.mbta.com/routes?")
-			.then(response => {
-				return response.json();
-			})
-			.then(response => {
-				let lines = response.data.map((line, index) => {
-					console.log(line.attributes.long_name);
-					return (
-						<option
-							value={this.makeUrl(line.links.self)}
-							key={line.attributes.sort_order}
-						>
-							{line.attributes.long_name}
-						</option>
-					);
-				});
-				this.setState({ lines: lines });
-				console.log("state", this.state.lines);
-			});
-	}
+	// makeUrl(end) {
+	// 	return `https://api-v3.mbta.com${end}`;
+	// }
+	//
+	// componentDidMount() {
+	// 	let fontColor = "";
+	// 	let bkgColor = "";
+	// 	fetch("https://api-v3.mbta.com/routes?")
+	// 		.then(response => {
+	// 			return response.json();
+	// 		})
+	// 		.then(response => {
+	// 			let lines = response.data.map((line, index) => {
+	// 				console.log(line.attributes.long_name);
+	// 				return (
+	// 					<option
+	// 						value={this.makeUrl(line.links.self)}
+	// 						key={line.attributes.sort_order}
+	// 					>
+	// 						{line.attributes.long_name}
+	// 					</option>
+	// 				);
+	// 			});
+	// 			this.setState({ lines: lines });
+	// 			console.log("state", this.state.lines);
+	// 		});
+	// }
 
 	render() {
 		return (
-			<form action="/action_page.php">
-				<select name="lines">{this.state.lines}</select>
-				<br />
-				<br />
-				<input type="submit" />
-			</form>
+			// <form action="/action_page.php">
+			// 	<select name="lines">{this.state.lines}</select>
+			// 	<br />
+			// 	<br />
+			// 	<input type="submit" class="btn btn-primary"/>
+			// </form>
+			<div className="">{this.props.stop_id}</div>
 		);
 	}
-	onInputChange(stopNum) {
-		this.setState({ stopNum });
-	}
+	// onInputChange(stopNum) {
+	// 	this.setState({ stopNum });
+	// }
 }
