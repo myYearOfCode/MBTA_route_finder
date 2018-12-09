@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DropdownButton } from 'react-bootstrap';
 
 //TODO
 // +++import colors and display them in the div bkgs
@@ -22,17 +23,20 @@ export default class LineSelector extends Component {
 
 	render() {
 		return (
+<div>
+
 			<select
 				name="Lines"
 				onChange={event =>
-					this.props.onLineSelectionChange(event.target.value)
+					this.props.handleLineSelector(event.target.value)
 				}
 			>
 				<option value="Blue">Blue</option>
 				<option value="Green">Green</option>
 				<option value="Orange">Orange</option>
-				<option value="Red">Red</option>
+				<option value="Red" defaultValue>Red</option>
 			</select>
-		);
+		</div>
+	);
 	}
 }

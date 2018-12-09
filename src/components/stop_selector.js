@@ -35,13 +35,15 @@ export default class StopSelector extends Component {
 						<option
 							value={stop.attributes.name}
 							key={stop.attributes.latitude}
+							lat={stop.attributes.latitude}
+							id={stop.id}
 						>
 							{stop.attributes.name}
 						</option>
 					);
 				});
 				this.setState({ stops: stops });
-				console.log("state", this.response);
+				// console.log("state", this.response);
 			});
 	}
 
@@ -56,13 +58,15 @@ export default class StopSelector extends Component {
 						<option
 							value={stop.attributes.name}
 							key={stop.attributes.latitude}
+							lat={stop.attributes.latitude}
+							id={stop.id}
 						>
 							{stop.attributes.name}
 						</option>
 					);
 				});
 				this.setState({ stops: stops });
-				console.log("state", this.response);
+				// console.log("state", this.response);
 			});
 	}
 
@@ -71,10 +75,12 @@ export default class StopSelector extends Component {
 			<select
 				name="Stops"
 				onChange={event =>
-					this.props.onStopSelectionChange(event.target.value)
+					// this.props.handleStopSelector(event.target.value)
+					{console.log(event.target.value);
+					this.props.handleStopSelector(event.target)}
 				}
 			>
-				{this.props.line}
+				{/* {this.props.line} */}
 				{this.state.stops}
 			</select>
 		);

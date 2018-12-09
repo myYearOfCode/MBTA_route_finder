@@ -6,44 +6,52 @@ import AllLines from "./all_lines";
 import PredictedSchedule from "./predicted_schedule";
 import LineSelector from "./line_selector";
 
-let selectLine = line => {
-	this.setState.line = line;
-};
+// let selectLine = line => {
+// 	this.setState.line = line;
+// };
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			line: "Red",
-			stop: ""
+			stop: "",
+			stop_id: ""
 		};
 		this.handleStopSelector = this.handleStopSelector.bind(this);
+		this.handleLineSelector = this.handleLineSelector.bind(this);
 	}
 
 	handleLineSelector = line => {
+		console.log("State: " + this.state.line)
 		console.log("Line: " + line);
-		this.setState({ line });
+		this.setState({ line: line });
+
 	};
+
 	handleStopSelector = stop => {
-		console.log("Stop: " + stop);
-		this.setState({ stop });
+		console.log("Stop: " + stop.value + stop);
+		this.setState({ stop: stop.value, stop_id: stop.id });
 	};
 
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				{this.state.line}
-				<LineSelector onLineSelectionChange={this.handleLineSelector} />
+				<LineSelector
+					line={this.state.line}
+					handleLineSelector={this.handleLineSelector}
+				/>
 				<StopSelector
 					line={this.state.line}
-					onStopSelectionChange={this.handleStopSelector}
+					handleStopSelector={this.handleStopSelector}
 				/>
-				{this.state.stop}
 				{/* I need to return the selected stop ID here*/}
-				<PredictedSchedule />
+				{/* make a parser for this url to make a name:id array periodically */}
+				{/* https://api-v3.mbta.com/stops */}
+				<PredictedSchedule stop_id={this.state.stop_id}/>
 				{/* I need to pass the stop id in here*/}
-				{/*<GetSchedule line="Red" stop={this.state.stop} />*/}
-			</div>
+			</React.Fragment>
 		);
 	}
 }
