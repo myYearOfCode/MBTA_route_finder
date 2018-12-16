@@ -6,10 +6,6 @@ import AllLines from "./all_lines";
 import PredictedSchedule from "./predicted_schedule";
 import LineSelector from "./line_selector";
 
-// let selectLine = line => {
-// 	this.setState.line = line;
-// };
-
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -26,13 +22,13 @@ export default class App extends Component {
 		console.log("State: " + this.state.line)
 		console.log("Line: " + line);
 		this.setState({ line: line });
-
 	};
 
 	handleStopSelector = stop => {
 		console.log("Stop: " + stop.value + stop);
 		this.setState({ stop: stop.value, stop_id: stop.id });
 	};
+
 
 	render() {
 		return (
