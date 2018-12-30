@@ -30,6 +30,8 @@ export default class LineSelector extends Component {
 				onChange={event =>
 					this.props.handleLineSelector(event.target.value)
 				}
+				value="Red"
+
 			>
 				<option value="Blue">Blue</option>
 				<option value="Green">Green</option>
