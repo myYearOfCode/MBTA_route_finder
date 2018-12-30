@@ -22,7 +22,6 @@ export default class App extends Component {
 		console.log("State: " + this.state.line)
 		console.log("Line: " + line);
 		this.setState({ line: line });
-		);
 	};
 
 	handleStopSelector = stop => {
