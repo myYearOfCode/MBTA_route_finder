@@ -48,7 +48,7 @@ export default class StopSelector extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		fetch(`https://api-v3.mbta.com/stops?filter[route]=${this.props.line}`)
+		fetch(`https://api-v3.mbta.com/stops?filter[route]=${nextProps.line}`)
 			.then(response => {
 				return response.json();
 			})
