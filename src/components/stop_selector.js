@@ -11,7 +11,9 @@ import Axios from "axios";
 // https://api-v3.mbta.com/schedules?filter[route]=Red&filter[min_time]=21:17&filter[max_time]=22:17&filter[direction_id]=0
 // ?filter[stop]=STOP_ID will show schedules at any given stop
 // https://api-v3.mbta.com/predictions?filter[stop]=STOP_ID will show predictions
-//how to get stop numbers?
+
+// /stops/place-portr
+// how to get stop numbers?
 // https://api-v3.mbta.com/stops?filter[route]=Red
 
 // it doesn't seem like that works. I'm not sure where to get the stop id from
@@ -62,10 +64,12 @@ export default class StopSelector extends Component {
 							id={stop.id}
 						>
 							{stop.attributes.name}
+							{/* {console.log(`"${stop.attributes.name}":"${stop.id}"`)} */}
 						</option>
 					);
 				});
-				this.setState({ stops: stops });
+				this.setState({ stops: stops});
+				// , stop_id: stop.id
 				// console.log("state", this.response);
 			});
 	}
@@ -76,12 +80,18 @@ export default class StopSelector extends Component {
 				name="Stops"
 				onChange={event =>
 					// this.props.handleStopSelector(event.target.value)
-					{console.log(event.target.value);
-					this.props.handleStopSelector(event.target)}
+					{
+						console.log("value = " + event.target.value);
+						// console.log("id = " + event);//.target.id);
+						console.dir( event.target );//.target.id);
+						console.log( event.target.id );
+						console.dir(event);
+					this.props.handleStopSelector(event.target.value, event.target.id)}
 				}
 			>
 				{/* {this.props.line} */}
 				{this.state.stops}
+				{/* {this.state.id} */}
 			</select>
 		);
 	}

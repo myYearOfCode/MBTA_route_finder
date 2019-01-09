@@ -24,9 +24,11 @@ export default class App extends Component {
 		this.setState({ line: line });
 	};
 
-	handleStopSelector = stop => {
-		console.log("Stop: " + stop.value + stop);
-		this.setState({ stop: stop.value, stop_id: stop.id });
+	handleStopSelector = (stop) => {
+		// console.log(stop)
+		// console.log("Stop: " + stop.value);
+		// console.log("id: " + stop_id);
+		this.setState({ stop: stop, stop_id: placeDict[stop]});
 	};
 
 
@@ -45,7 +47,8 @@ export default class App extends Component {
 				{/* I need to return the selected stop ID here*/}
 				{/* make a parser for this url to make a name:id array periodically */}
 				{/* https://api-v3.mbta.com/stops */}
-				<PredictedSchedule stop_id={this.state.stop_id}/>
+				{console.log("lookup test = " + placeDict[this.state.stop])}
+				<PredictedSchedule stop_id={placeDict[this.state.stop]}/>
 				{/* I need to pass the stop id in here*/}
 			</React.Fragment>
 		);
@@ -54,3 +57,131 @@ export default class App extends Component {
 // <SearchBar />
 
 // <AllLines />
+let placeDict = {
+    "Alewife": "place-alfcl",
+    "Davis": "place-davis",
+    "Porter": "place-portr",
+    "Harvard": "place-harsq",
+    "Central": "place-cntsq",
+    "Kendall/MIT": "place-knncl",
+    "Charles/MGH": "place-chmnl",
+    "Park Street": "place-pktrm",
+    "Downtown Crossing": "place-dwnxg",
+    "South Station": "place-sstat",
+    "Broadway": "place-brdwy",
+    "Andrew": "place-andrw",
+    "JFK/UMass": "place-jfk",
+    "Savin Hill": "place-shmnl",
+    "Fields Corner": "place-fldcr",
+    "Shawmut": "place-smmnl",
+    "North Quincy": "place-nqncy",
+    "Quincy Center": "place-qnctr",
+    "Quincy Adams": "place-qamnl",
+    "Braintree": "place-brntn",
+    "Ashmont": "place-asmnl",
+    "Forest Hills": "place-forhl",
+    "Green Street": "place-grnst",
+    "Stony Brook": "place-sbmnl",
+    "Jackson Square": "place-jaksn",
+    "Roxbury Crossing": "place-rcmnl",
+    "Ruggles": "place-rugg",
+    "Massachusetts Avenue": "place-masta",
+    "Back Bay": "place-bbsta",
+    "Tufts Medical Center": "place-tumnl",
+    "Chinatown": "place-chncl",
+    "Downtown Crossing": "place-dwnxg",
+    "State": "place-state",
+    "Haymarket": "place-haecl",
+    "North Station": "place-north",
+    "Community College": "place-ccmnl",
+    "Sullivan Square": "place-sull",
+    "Assembly": "place-astao",
+    "Wellington": "place-welln",
+    "Malden Center": "place-mlmnl",
+    "Oak Grove": "place-ogmnl",
+    "Bowdoin": "place-bomnl",
+    "Government Center": "place-gover",
+    "State": "place-state",
+    "Aquarium": "place-aqucl",
+    "Maverick": "place-mvbcl",
+    "Airport": "place-aport",
+    "Wood Island": "place-wimnl",
+    "Orient Heights": "place-orhte",
+    "Suffolk Downs": "place-sdmnl",
+    "Beachmont": "place-bmmnl",
+    "Revere Beach": "place-rbmnl",
+    "Wonderland": "place-wondl",
+    "Boston College": "place-lake",
+    "South Street": "place-sougr",
+    "Chestnut Hill Avenue": "place-chill",
+    "Chiswick Road": "place-chswk",
+    "Sutherland Road": "place-sthld",
+    "Washington Street": "place-wascm",
+    "Warren Street": "place-wrnst",
+    "Allston Street": "place-alsgr",
+    "Griggs Street": "place-grigg",
+    "Harvard Avenue": "place-harvd",
+    "Packards Corner": "place-brico",
+    "Babcock Street": "place-babck",
+    "Pleasant Street": "place-plsgr",
+    "Saint Paul Street": "place-stplb",
+    "Boston University West": "place-buwst",
+    "Boston University Central": "place-bucen",
+    "Boston University East": "place-buest",
+    "Blandford Street": "place-bland",
+    "Kenmore": "place-kencl",
+    "Hynes Convention Center": "place-hymnl",
+    "Copley": "place-coecl",
+    "Arlington": "place-armnl",
+    "Boylston": "place-boyls",
+    "Park Street": "place-pktrm",
+    "Cleveland Circle": "place-clmnl",
+    "Englewood Avenue": "place-engav",
+    "Dean Road": "place-denrd",
+    "Tappan Street": "place-tapst",
+    "Washington Square": "place-bcnwa",
+    "Fairbanks Street": "place-fbkst",
+    "Brandon Hall": "place-bndhl",
+    "Summit Avenue": "place-sumav",
+    "Coolidge Corner": "place-cool",
+    "Saint Paul Street": "place-stpul",
+    "Kent Street": "place-kntst",
+    "Hawes Street": "place-hwsst",
+    "Saint Marys Street": "place-smary",
+    "Government Center": "place-gover",
+    "Haymarket": "place-haecl",
+    "North Station": "place-north",
+    "Fenway": "place-fenwy",
+    "Longwood": "place-longw",
+    "Brookline Village": "place-bvmnl",
+    "Brookline Hills": "place-brkhl",
+    "Beaconsfield": "place-bcnfd",
+    "Reservoir": "place-rsmnl",
+    "Chestnut Hill": "place-chhil",
+    "Newton Centre": "place-newto",
+    "Newton Highlands": "place-newtn",
+    "Eliot": "place-eliot",
+    "Waban": "place-waban",
+    "Woodland": "place-woodl",
+    "Riverside": "place-river",
+    "Heath Street": "place-hsmnl",
+    "Back of the Hill": "place-bckhl",
+    "Riverway": "place-rvrwy",
+    "Mission Park": "place-mispk",
+    "Fenwood Road": "place-fenwd",
+    "Brigham Circle": "place-brmnl",
+    "Longwood Medical Area": "place-lngmd",
+    "Museum of Fine Arts": "place-mfa",
+    "Northeastern University": "place-nuniv",
+    "Symphony": "place-symcl",
+    "Prudential": "place-prmnl",
+    "Copley": "place-coecl",
+    "Arlington": "place-armnl",
+    "Boylston": "place-boyls",
+    "Park Street": "place-pktrm",
+    "Government Center": "place-gover",
+    "Haymarket": "place-haecl",
+    "North Station": "place-north",
+    "Science Park": "place-spmnl",
+    "Lechmere": "place-lech"
+}
