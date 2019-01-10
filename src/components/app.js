@@ -5,6 +5,13 @@ import StopSelector from "./stop_selector";
 import AllLines from "./all_lines";
 import PredictedSchedule from "./predicted_schedule";
 import LineSelector from "./line_selector";
+import GeoLoc from "./geo_locator";
+
+// TODO:
+// figure out how to get data out of geolocator.
+// decide on one workflow.
+// make geolocator button.
+// have fun
 
 export default class App extends Component {
 	constructor(props) {
@@ -39,17 +46,21 @@ export default class App extends Component {
 				<LineSelector
 					line={this.state.line}
 					handleLineSelector={this.handleLineSelector}
+					className = "child"
 				/>
 				<StopSelector
 					line={this.state.line}
 					handleStopSelector={this.handleStopSelector}
+					className = "child"
 				/>
 				{/* I need to return the selected stop ID here*/}
 				{/* make a parser for this url to make a name:id array periodically */}
 				{/* https://api-v3.mbta.com/stops */}
 				{console.log("lookup test = " + placeDict[this.state.stop])}
-				<PredictedSchedule stop_id={placeDict[this.state.stop]}/>
+				<PredictedSchedule stop_id={placeDict[this.state.stop]}
+				className = "child"/>
 				{/* I need to pass the stop id in here*/}
+				<GeoLoc />
 			</React.Fragment>
 		);
 	}
