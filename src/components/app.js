@@ -60,7 +60,7 @@ export default class App extends Component {
 				<PredictedSchedule stop_id={placeDict[this.state.stop]}
 				className = "child"/>
 				{/* I need to pass the stop id in here*/}
-				<GeoLoc />
+				<GeoLoc className="geoloc"/>
 			</React.Fragment>
 		);
 	}
