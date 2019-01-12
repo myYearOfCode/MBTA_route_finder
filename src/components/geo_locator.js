@@ -12,13 +12,14 @@ export default class GeoLoc extends Component {
 		};
 	}
 componentWillMount() {
-	this.geoLocate();
+	// this.geoLocate();
+	// ideally this is replaced with a button when I figure out how to do that.
 }
-	// geoLocate = geoLocate.bind(this)
+
 	render() {
-		// make button here that asks for geolocation access when clicked.
 		return (
 			<React.Fragment>
+				<button onClick={this.geoLocate()}>Geo Locate Me!</button>
 				<div id="closestStop">The stop closest to you is:  {this.state.closestStop}</div>
 				{/* {this.geoLocate()} */}
 
