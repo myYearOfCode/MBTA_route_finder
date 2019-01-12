@@ -1,40 +1,28 @@
 import React, { Component } from "react";
 
 export default class GeoLoc extends Component {
-	// pass closest stop state up to app.
-	// make a function that receives the stop in props and runs the api call
-	// here is the porter api call https://api-v3.mbta.com/schedules?filter[stop]=70065
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			stops: "",
-			closestStop: "un_de_fined",
+			closestStop: "",
 		};
 	}
-componentWillMount() {
-	// this.geoLocate();
-	// ideally this is replaced with a button when I figure out how to do that.
-}
 
 	render() {
 		return (
 			<React.Fragment>
-				<button onClick={this.geoLocate()}>Geo Locate Me!</button>
+				<button onClick={this.geoLocate}>GeoLocate Me</button>
 				<div id="closestStop">The stop closest to you is:  {this.state.closestStop}</div>
-				{/* {this.geoLocate()} */}
-
 			</React.Fragment>
 		)
 	};
+
 	//geolocation code from stack overflow
 	geoLocate = () => {
 		if (navigator.geolocation) {
-			console.log("geolocate is go");
-			// findClosestStop("hi");
 			let closestStop = navigator.geolocation.getCurrentPosition(this.findClosestStop, this.errorFunction)
-			// console.log("closestStop is " + closestStop)
-			// this.setState({"closestStop": closestStop});
-			// return closestStop;
 		} else {
 			alert(
 				"It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it."
@@ -46,58 +34,64 @@ componentWillMount() {
 		console.log("It seems like geolocation is disabled.");
 	}
 
-	// this takes the users position and finds distance to each of the stops.
-	// it takes a few seconds and returns a 254 element array.
+	// take the users position and finds distance to each of the stops.
+	// take a few seconds to return a 254 element array.
 	findClosestStop = (position) => {
-		console.log("position")
+		this.props.handleClosestStop("loading", "loading")
+
+		// set vars for longitude and latitude
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
-		console.log(lat + " " + lon);
+
+		// read through the object with the stop data in it.
 		let mydata = JSON.parse(data);
 		for (let i = 0; i < mydata.length; i++) {
 			let stopLat = mydata[i].stop_lat;
 			let stopLon = mydata[i].stop_lon;
+
+			// calc the distance between geolocation and current stop
 			let distance = Math.sqrt(
 				Math.pow(lat - stopLat, 2) + Math.pow(lon - stopLon, 2)
 			);
-			// this adds a distance variable to the stop objects
+
+			// add the distance to the stop object
 			mydata[i].distance = distance;
 		}
-		// this sorts based on the distance variable
+
+		// sort based on the distance variable
 		mydata.sort(function(a, b) {
 			return a.distance - b.distance;
 		});
 
-		console.log(mydata.slice(0, 1));
-		console.log("Stop name is: " + mydata[0].stop_name);
 		this.setState({"closestStop": mydata[0].stop_name});
+		this.props.handleClosestStop(mydata[0].stop_name,mydata[0].parent_station)
 		return mydata[0].stop_name;
 	}
 
-	lookUpStopName = (stop) => {
-		// returns the stop object when given the stop name.
-		// maybe a key : object pair would be more performant.
-		let mydata = JSON.parse(data);
-		for (let i = 0; i < mydata.length; i++) {
-			if (stop === mydata[i].stop_name) {
-				console.log(mydata[i]);
-			}
-		}
-	}
+	// lookUpStopName = (stop) => {
+	// 	// returns the stop object when given the stop name.
+	// 	// maybe a key : object pair would be more performant.
+	// 	let mydata = JSON.parse(data);
+	// 	for (let i = 0; i < mydata.length; i++) {
+	// 		if (stop === mydata[i].stop_name) {
+	// 			// console.log(mydata[i]);
+	// 		}
+	// 	}
+	// }
 
-	returnStopsFromLine = (line) => {
-		//returns the stops on a line
-		//for use in building a selector.
-		let mydata = JSON.parse(data);
-		let term = RegExp(line + " Line");
-
-		for (let i = 0; i < mydata.length; i++) {
-			if (term.test(mydata[i].stop_desc)) {
-				console.log(mydata[i].stop_desc, mydata[i].stop_id);
-			}
-		}
-		console.log(term);
-	}
+	// returnStopsFromLine = (line) => {
+	// 	//returns the stops on a line
+	// 	//for use in building a selector.
+	// 	let mydata = JSON.parse(data);
+	// 	let term = RegExp(line + " Line");
+	//
+	// 	for (let i = 0; i < mydata.length; i++) {
+	// 		if (term.test(mydata[i].stop_desc)) {
+	// 			console.log(mydata[i].stop_desc, mydata[i].stop_id);
+	// 		}
+	// 	}
+	// 	console.log(term);
+	// }
 }
 
 

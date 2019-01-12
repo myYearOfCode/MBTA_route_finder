@@ -21,43 +21,52 @@ export default class PredictedSchedule extends Component {
 		super(props);
 		this.state = {
 			lines: "",
-			vehicles: ""
+			vehicles: "",
+			stop_id: ""
 		};
 	}
-
+//
 	componentWillReceiveProps(nextProps) {
 		// example call
 		// https://api-v3.mbta.com/predictions?filter[stop]=place-portr
 		// I need to get time in a usable format and then sort by current time.
 		// then display the 3 closest trains in each direction.
-		fetch(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
-			.then(response => {
-				return response.json();
-			})
-			.then(response => {
-				let stops = response.data.map(trip => {
-					return (
-						<option
-							value={trip.attributes.name}
-							key={trip.attributes.latitude}
-							lat={trip.attributes.latitude}
-							id={trip.id}
-						>
-							{stop.attributes.name}
-							{/* {console.log(`"${stop.attributes.name}":"${stop.id}"`)} */}
-						</option>
-					);
-				});
-				this.setState({ stops: stops});
-				// , stop_id: stop.id
-				// console.log("state", this.response);
+		console.log(typeof nextProps)
+		console.log(nextProps)
+		if (typeof nextProps !== "undefined"){
+			console.log(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
+			fetch(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
+				.then(response => {
+					return response.json();
+				})
+				.then(response => {
+					let trips = response.data.map(trip => {
+						return (
+							<option
+								value={trip.id}
+								time={trip.attributes.arrival_time}
+								direction={trip.attributes.direction_id}
+								id={trip.id}
+							>
+								{/* {stop.attributes.name} */}
+								{/* {console.log(`"${stop.attributes.name}":"${stop.id}"`)} */}
+							</option>
+						);
+					});
+					this.setState({ trips: trips});
+					console.log(trips)
+					// , stop_id: stop.id
+					// console.log("state", this.response);
 			});
-	}
+		}
+}
 
 	render() {
 		return (
+
 			// https://api-v3.mbta.com/predictions?filter[stop]=STOP_ID
-			<div className="">{this.props.stop_id}</div>
+			<div className="">predicted props are:{this.props.stop_id}. thank you</div>
+
 		);
 	}
 }

@@ -8,9 +8,9 @@ import LineSelector from "./line_selector";
 import GeoLoc from "./geo_locator";
 
 // TODO:
-// figure out how to get data out of geolocator.
-// decide on one workflow.
-// make geolocator button.
+// make the stop selector and line selector controlled components
+// grab schedules from geolocated stations
+// grab schedules from selected stations
 // have fun
 
 export default class App extends Component {
@@ -23,6 +23,7 @@ export default class App extends Component {
 		};
 		this.handleStopSelector = this.handleStopSelector.bind(this);
 		this.handleLineSelector = this.handleLineSelector.bind(this);
+		this.handleClosestStop = this.handleClosestStop.bind(this);
 	}
 
 	handleLineSelector = line => {
@@ -32,10 +33,11 @@ export default class App extends Component {
 	};
 
 	handleStopSelector = (stop) => {
-		// console.log(stop)
-		// console.log("Stop: " + stop.value);
-		// console.log("id: " + stop_id);
 		this.setState({ stop: stop, stop_id: placeDict[stop]});
+	};
+
+	handleClosestStop = (closestStop,closestStopShort) => {
+		this.setState({ stop: closestStop, stop_id: closestStopShort});
 	};
 
 
@@ -56,11 +58,21 @@ export default class App extends Component {
 				{/* I need to return the selected stop ID here*/}
 				{/* make a parser for this url to make a name:id array periodically */}
 				{/* https://api-v3.mbta.com/stops */}
-				{console.log("lookup test = " + placeDict[this.state.stop])}
-				<PredictedSchedule stop_id={placeDict[this.state.stop]}
-				className = "child"/>
+				{/* {console.log("lookup test = " + placeDict[this.state.stop])} */}
 				{/* I need to pass the stop id in here*/}
-				<GeoLoc className="geoloc"/>
+
+				<GeoLoc
+					className="geoloc"
+					handleClosestStop={this.handleClosestStop}
+					className="child"
+				/>
+
+				<PredictedSchedule
+				stop_id={this.state.stop_id}
+				className = "child"
+				/>
+
+
 			</React.Fragment>
 		);
 	}
