@@ -67,32 +67,20 @@ export default class PredictedSchedule extends Component {
 					});
 					this.setState({ trips: trips});
 					// console.log(trips)
-					nextProps.handlePredictedSchedule(trips)
-					// , stop_id: stop.id
-					// console.log("state", this.response);
+					nextProps.handlePredictedSchedule(trips) // passes trips up. useful?
+					let maxLength = 3
+					let dir_one_array = trips.filter( trip => trip.props.direction == 1);
+					let dir_zero_array = trips.filter( trip => trip.props.direction == 0);
+					console.log(dir_one_array)
+					console.log(dir_zero_array)
 			});
 		}
 	}
 
 	render() {
-		// do some magic here to sort through the incoming trips to find the next
-		// three in each direction
-		// walk through the data one item at a time
-		let dir_one_array = []
-		let dir_zero_array = []
-		let trips = this.state.trips
-		console.log(typeof trips)
-		let arriving_trains = trips.map( trip => {
 
-			if (dir_one_array.length < maxLength && trip.data.props.direction == 1) {
-				return(dir_one_array)
-			}
-			if (dir_zero_array.length < maxLength && trip.data.props.direction == 0) {
-				return(dir_zero_array)
-			}
-		})
 		return (
-			<div className="trips"> {dir_one_array}, {this.state.trips.slice(0,3)}</div>
+			<div className="trips"> {this.state.trips.slice(0,3)}</div>
 
 		);
 	}
