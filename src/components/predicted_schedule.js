@@ -20,9 +20,8 @@ export default class PredictedSchedule extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			lines: "",
-			vehicles: "",
-			stop_id: ""
+			stop_id: props.stop_id,
+			trips: "trips"
 		};
 	}
 //
@@ -31,10 +30,14 @@ export default class PredictedSchedule extends Component {
 		// https://api-v3.mbta.com/predictions?filter[stop]=place-portr
 		// I need to get time in a usable format and then sort by current time.
 		// then display the 3 closest trains in each direction.
-		console.log(typeof nextProps)
-		console.log(nextProps)
-		if (typeof nextProps !== "undefined"){
-			console.log(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
+		// console.log(typeof nextProps)
+		// console.log(nextProps)
+
+		if (typeof nextProps !== "undefined" && this.state.stop_id !== nextProps.stop_id){
+			// maybe I should make this a better test to see if it actually needs a rerender.
+			// console.log("stop id = " + this.state.stop_id)
+			// console.log("next stop id = " + nextProps.stop_id)
+			this.setState({stop_id: nextProps.stop_id});
 			fetch(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
 				.then(response => {
 					return response.json();
@@ -42,30 +45,54 @@ export default class PredictedSchedule extends Component {
 				.then(response => {
 					let trips = response.data.map(trip => {
 						return (
-							<option
+							<div
 								value={trip.id}
 								time={trip.attributes.arrival_time}
 								direction={trip.attributes.direction_id}
 								id={trip.id}
+								key={trip.id}
 							>
-								{/* {stop.attributes.name} */}
-								{/* {console.log(`"${stop.attributes.name}":"${stop.id}"`)} */}
-							</option>
+								{trip.id}
+
+							</div>
+							// {/* <option
+							// 	value={trip.id}
+							// 	time={trip.attributes.arrival_time}
+							// 	direction={trip.attributes.direction_id}
+							// 	id={trip.id}
+							// >
+							// </option> */}
 						);
+
 					});
 					this.setState({ trips: trips});
-					console.log(trips)
+					// console.log(trips)
+					nextProps.handlePredictedSchedule(trips)
 					// , stop_id: stop.id
 					// console.log("state", this.response);
 			});
 		}
-}
+	}
 
 	render() {
-		return (
+		// do some magic here to sort through the incoming trips to find the next
+		// three in each direction
+		// walk through the data one item at a time
+		let dir_one_array = []
+		let dir_zero_array = []
+		let trips = this.state.trips
+		console.log(typeof trips)
+		let arriving_trains = trips.map( trip => {
 
-			// https://api-v3.mbta.com/predictions?filter[stop]=STOP_ID
-			<div className="">predicted props are:{this.props.stop_id}. thank you</div>
+			if (dir_one_array.length < maxLength && trip.data.props.direction == 1) {
+				return(dir_one_array)
+			}
+			if (dir_zero_array.length < maxLength && trip.data.props.direction == 0) {
+				return(dir_zero_array)
+			}
+		})
+		return (
+			<div className="trips"> {dir_one_array}, {this.state.trips.slice(0,3)}</div>
 
 		);
 	}

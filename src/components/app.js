@@ -40,6 +40,10 @@ export default class App extends Component {
 		this.setState({ stop: closestStop, stop_id: closestStopShort});
 	};
 
+	handlePredictedSchedule = (predicted_schedule) => {
+		this.setState({ predicted_schedule: predicted_schedule});
+	};
+
 
 	render() {
 		return (
@@ -69,9 +73,10 @@ export default class App extends Component {
 
 				<PredictedSchedule
 				stop_id={this.state.stop_id}
+				handlePredictedSchedule={this.handlePredictedSchedule}
 				className = "child"
 				/>
-
+				{/* {this.state.predicted_schedule} */}
 
 			</React.Fragment>
 		);
