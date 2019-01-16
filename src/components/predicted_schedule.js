@@ -21,7 +21,9 @@ export default class PredictedSchedule extends Component {
 		super(props);
 		this.state = {
 			stop_id: props.stop_id,
-			trips: "trips"
+			trips: "trips",
+			dir_one_array: [],
+			dir_zero_array: []
 		};
 	}
 //
@@ -71,6 +73,37 @@ export default class PredictedSchedule extends Component {
 					let maxLength = 3
 					let dir_one_array = trips.filter( trip => trip.props.direction == 1);
 					let dir_zero_array = trips.filter( trip => trip.props.direction == 0);
+
+					let dir_one_times = dir_one_array.slice(0,maxLength).map( trip => {
+						// make a time formatter here.
+						try {
+							return (
+								<div key = {trip.props.time}>
+									{trip.props.time}
+								</div>
+							)
+						} catch (e) {
+							console.log('error accessing trip.props.time')
+						} finally {
+
+						}
+					})
+					let dir_zero_times = dir_zero_array.slice(0,maxLength).map( trip => {
+						try {
+							return (
+								<div key = {trip.props.time}>
+									{trip.props.time}
+								</div>
+							)
+						} catch (e) {
+							console.log('error accessing trip.props.time')
+						} finally {
+
+						}
+					})
+
+					console.dir(dir_one_times)
+					this.setState({dir_one_array: dir_one_array, dir_zero_array: dir_zero_array, dir_zero_times: dir_zero_times, dir_one_times: dir_one_times})
 					console.log(dir_one_array)
 					console.log(dir_zero_array)
 			});
@@ -80,8 +113,10 @@ export default class PredictedSchedule extends Component {
 	render() {
 
 		return (
-			<div className="trips"> {this.state.trips.slice(0,3)}</div>
-
+			<React.Fragment>
+				<div className="trips"> Direction One: {this.state.dir_one_times}</div>
+				<div className="trips"> Direction Zero: {this.state.dir_zero_times}</div>
+			</React.Fragment>
 		);
 	}
 }
