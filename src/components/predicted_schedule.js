@@ -40,6 +40,8 @@ export default class PredictedSchedule extends Component {
 			// console.log("stop id = " + this.state.stop_id)
 			// console.log("next stop id = " + nextProps.stop_id)
 			this.setState({stop_id: nextProps.stop_id});
+			var todaysDate = new Date();
+			var timeNow = todaysDate.getTime();
 			fetch(`https://api-v3.mbta.com/predictions?filter[stop]=${nextProps.stop_id}`)
 				.then(response => {
 					return response.json();
@@ -74,32 +76,14 @@ export default class PredictedSchedule extends Component {
 					let dir_one_array = trips.filter( trip => trip.props.direction == 1);
 					let dir_zero_array = trips.filter( trip => trip.props.direction == 0);
 
+
+
 					let dir_one_times = dir_one_array.slice(0,maxLength).map( trip => {
 						// make a time formatter here.
-						try {
-							return (
-								<div key = {trip.props.time}>
-									{trip.props.time}
-								</div>
-							)
-						} catch (e) {
-							console.log('error accessing trip.props.time')
-						} finally {
-
-						}
+						return (this.doTimeMath(trip, timeNow))
 					})
 					let dir_zero_times = dir_zero_array.slice(0,maxLength).map( trip => {
-						try {
-							return (
-								<div key = {trip.props.time}>
-									{trip.props.time}
-								</div>
-							)
-						} catch (e) {
-							console.log('error accessing trip.props.time')
-						} finally {
-
-						}
+						return (this.doTimeMath(trip, timeNow))
 					})
 
 					console.dir(dir_one_times)
@@ -107,6 +91,31 @@ export default class PredictedSchedule extends Component {
 					console.log(dir_one_array)
 					console.log(dir_zero_array)
 			});
+		}
+	}
+
+	doTimeMath(trip, timeNow){
+		try {
+			let waitTime = Math.round((Date.parse(trip.props.time) - timeNow) / 60000)
+			if (waitTime > 0) {
+				return (
+					<div key = {trip.props.time}>
+						{String(waitTime)+" Minutes away."}
+					</div>
+				)
+			}
+			else {
+				return (
+					<div key = {trip.props.time}>
+						{"At station."}
+					</div>
+				)
+			}
+		} catch (e) {
+			console.log('error accessing trip.props.time')
+			console.log(e)
+		} finally {
+
 		}
 	}
 
