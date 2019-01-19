@@ -26,6 +26,13 @@ export default class StopSelector extends Component {
 		};
 	}
 
+	shouldComponentUpdate(nextProps) {
+		console.log(nextProps.line)
+		console.log(this.props.line)
+		console.log(nextProps.line !== this.props.line)
+		return(nextProps.line !== this.props.line)
+	}
+
 	componentWillMount(props) {
 		fetch(`https://api-v3.mbta.com/stops?filter[route]=${this.props.line}`)
 			.then(response => {
@@ -82,24 +89,14 @@ export default class StopSelector extends Component {
 					// this.props.handleStopSelector(event.target.value)
 					{
 						console.log("value = " + event.target.value);
-						// console.log("id = " + event);//.target.id);
 						console.dir( event.target );//.target.id);
 						console.log( event.target.id );
 						console.dir(event);
 					this.props.handleStopSelector(event.target.value, event.target.id)}
 				}
 			>
-				{/* {this.props.line} */}
 				{this.state.stops}
-				{/* {this.state.id} */}
 			</select>
 		);
 	}
 }
-
-// <option
-// 	value={`Select an ${this.props.line} stop.`}
-// 	key="header"
-// >
-// 					{stop.attributes.name}
-// </option>

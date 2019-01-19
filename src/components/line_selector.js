@@ -22,27 +22,29 @@ export default class LineSelector extends Component {
 		super(props);
 	}
 
+	// shouldComponentUpdate(nextProps) {
+	// 	return(nextProps.line == this.props.line)
+	// }
 	render() {
 		return (
-<div>
+			<div>
+				<select
+					name="Lines"
+					onChange={event =>
+						this.props.handleLineSelector(event.target.value)
+					}
+					value={this.props.line}
 
-			<select
-				name="Lines"
-				onChange={event =>
-					this.props.handleLineSelector(event.target.value)
-				}
-				value={this.props.line}
-
-			>
-				<option value="Blue">Blue</option>
-				<option value="Green-B">Green B</option>
-				<option value="Green-C">Green C</option>
-				<option value="Green-D">Green D</option>
-				<option value="Green-E">Green E</option>
-				<option value="Orange">Orange</option>
-				<option value="Red" defaultValue>Red</option>
-			</select>
-		</div>
-	);
+				>
+					<option value="Blue">Blue</option>
+					<option value="Green-B">Green B</option>
+					<option value="Green-C">Green C</option>
+					<option value="Green-D">Green D</option>
+					<option value="Green-E">Green E</option>
+					<option value="Orange">Orange</option>
+					<option value="Red" defaultValue>Red</option>
+				</select>
+			</div>
+		);
 	}
 }
