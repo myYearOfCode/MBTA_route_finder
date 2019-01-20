@@ -19,7 +19,8 @@ export default class App extends Component {
 		this.state = {
 			line: "Red",
 			stop: "",
-			stop_id: ""
+			stop_id: "",
+			geo_located: false
 		};
 		this.handleStopSelector = this.handleStopSelector.bind(this);
 		this.handleLineSelector = this.handleLineSelector.bind(this);
@@ -33,11 +34,12 @@ export default class App extends Component {
 	};
 
 	handleStopSelector = (stop) => {
-		this.setState({ stop: stop, stop_id: placeDict[stop]});
+		this.setState({ stop: stop, stop_id: placeDict[stop], geo_located: false});
 	};
 
 	handleClosestStop = (closestStop,closestStopShort) => {
-		this.setState({ stop: closestStop, stop_id: closestStopShort});
+		this.setState({ stop: closestStop, stop_id: closestStopShort, geo_located: true});
+
 	};
 
 	handlePredictedSchedule = (predicted_schedule) => {
@@ -68,6 +70,7 @@ export default class App extends Component {
 				<GeoLoc
 					className="geoloc"
 					handleClosestStop={this.handleClosestStop}
+					geo_located={this.state.geo_located}
 					className="child"
 				/>
 

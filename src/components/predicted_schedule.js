@@ -33,7 +33,8 @@ export default class PredictedSchedule extends Component {
 		// I need to get time in a usable format and then sort by current time.
 		// then display the 3 closest trains in each direction.
 		// console.log(typeof nextProps)
-		// console.log(nextProps)
+
+		// console.log(`predicted schedule has received ${nextProps.stop_id}`)
 
 		if (typeof nextProps !== "undefined" && this.state.stop_id !== nextProps.stop_id){
 			// maybe I should make this a better test to see if it actually needs a rerender.
@@ -57,15 +58,7 @@ export default class PredictedSchedule extends Component {
 								key={trip.id}
 							>
 								{trip.id}
-
 							</div>
-							// {/* <option
-							// 	value={trip.id}
-							// 	time={trip.attributes.arrival_time}
-							// 	direction={trip.attributes.direction_id}
-							// 	id={trip.id}
-							// >
-							// </option> */}
 						);
 
 					});
@@ -75,21 +68,15 @@ export default class PredictedSchedule extends Component {
 					let maxLength = 3
 					let dir_one_array = trips.filter( trip => trip.props.direction == 1);
 					let dir_zero_array = trips.filter( trip => trip.props.direction == 0);
-
-
-
 					let dir_one_times = dir_one_array.slice(0,maxLength).map( trip => {
-						// make a time formatter here.
 						return (this.doTimeMath(trip, timeNow))
 					})
+
 					let dir_zero_times = dir_zero_array.slice(0,maxLength).map( trip => {
 						return (this.doTimeMath(trip, timeNow))
 					})
 
-					// console.dir(dir_one_times)
 					this.setState({dir_one_array: dir_one_array, dir_zero_array: dir_zero_array, dir_zero_times: dir_zero_times, dir_one_times: dir_one_times})
-					// console.log(dir_one_array)
-					// console.log(dir_zero_array)
 			});
 		}
 	}
