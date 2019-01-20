@@ -11,6 +11,10 @@ import GeoLoc from "./geo_locator";
 // make the stop selector and line selector controlled components
 // grab schedules from geolocated stations
 // grab schedules from selected stations
+// determine direction and label them with end Stops
+// fix issue with blank divs building up due to a lack of keys.
+// fix issue with geolocate button getting messed up after clicking on it.
+// make pretty.
 // have fun
 
 export default class App extends Component {
@@ -39,7 +43,6 @@ export default class App extends Component {
 
 	handleClosestStop = (closestStop,closestStopShort) => {
 		this.setState({ stop: closestStop, stop_id: closestStopShort, geo_located: true});
-
 	};
 
 	handlePredictedSchedule = (predicted_schedule) => {
@@ -71,6 +74,7 @@ export default class App extends Component {
 					className="geoloc"
 					handleClosestStop={this.handleClosestStop}
 					geo_located={this.state.geo_located}
+					stop={this.state.stop}
 					className="child"
 				/>
 

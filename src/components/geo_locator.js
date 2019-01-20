@@ -15,7 +15,7 @@ export default class GeoLoc extends Component {
 			var out_string = `This stop closest to you is ${this.state.closestStop}`
 		}
 		else {
-			var out_string = `You have selected: ${this.state.stop}`
+			var out_string = `You have selected: ${this.props.stop}`
 		}
 		return (
 			<React.Fragment>
