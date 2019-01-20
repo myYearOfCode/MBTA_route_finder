@@ -12,6 +12,15 @@ import GeoLoc from "./geo_locator";
 // grab schedules from geolocated stations
 // grab schedules from selected stations
 // determine direction and label them with end Stops
+//    https://api-v3.mbta.com/routes/Red
+//    "data.attributes.direction_destinations: [
+				// "Ashmont/Braintree",
+				// "Alewife"
+				// ]
+//    "data.attributes.direction_names: [
+				// "South",
+				// "North"
+				// ],
 // fix issue with blank divs building up due to a lack of keys.
 // fix issue with geolocate button getting messed up after clicking on it.
 // make pretty.
