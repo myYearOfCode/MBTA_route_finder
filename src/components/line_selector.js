@@ -22,9 +22,10 @@ export default class LineSelector extends Component {
 		super(props);
 	}
 
-	// shouldComponentUpdate(nextProps) {
+	// shouldComponentUpdate(nextProps, nextState) {
 	// 	return(nextProps.line == this.props.line)
 	// }
+
 	render() {
 		return (
 			<div>

@@ -86,10 +86,10 @@ export default class PredictedSchedule extends Component {
 						return (this.doTimeMath(trip, timeNow))
 					})
 
-					console.dir(dir_one_times)
+					// console.dir(dir_one_times)
 					this.setState({dir_one_array: dir_one_array, dir_zero_array: dir_zero_array, dir_zero_times: dir_zero_times, dir_one_times: dir_one_times})
-					console.log(dir_one_array)
-					console.log(dir_zero_array)
+					// console.log(dir_one_array)
+					// console.log(dir_zero_array)
 			});
 		}
 	}
