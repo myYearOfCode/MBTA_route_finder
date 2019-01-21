@@ -110,8 +110,8 @@ export default class PredictedSchedule extends Component {
 
 		return (
 			<React.Fragment>
-				<div className="trips"> Direction One: {this.state.dir_one_times}</div>
-				<div className="trips"> Direction Zero: {this.state.dir_zero_times}</div>
+				<div className="trips hidden"> Direction One: {this.state.dir_one_times}</div>
+				<div className="trips hidden"> Direction Zero: {this.state.dir_zero_times}</div>
 			</React.Fragment>
 		);
 	}
