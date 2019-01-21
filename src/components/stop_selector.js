@@ -76,6 +76,7 @@ export default class StopSelector extends Component {
 		return (
 			<select
 				name="Stops"
+				className="stopList hidden"
 				onChange={event =>
 					// this.props.handleStopSelector(event.target.value)
 					{

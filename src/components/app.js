@@ -44,25 +44,47 @@ export default class App extends Component {
 		console.log("State: " + this.state.line)
 		console.log("Line: " + line);
 		this.setState({ line: line });
+		document.getElementsByClassName("stopList")[0].classList.remove('hidden');
+		document.getElementsByClassName("stopList")[0].classList.add('visible');
 	};
 
 	handleStopSelector = (stop) => {
 		this.setState({ stop: stop, stop_id: placeDict[stop], geo_located: false});
+		document.getElementsByClassName("trips")[0].classList.remove('hidden');
+		document.getElementsByClassName("trips")[0].classList.add('visible');
+		let stopTextElements = document.getElementsByClassName("stopText")
+		console.dir(stopTextElements)
+		stopTextElements[0].classList.remove('hidden');
+		stopTextElements[0].classList.add('visible');
+		stopTextElements[1].classList.remove('hidden');
+		stopTextElements[1].classList.add('visible');
+		// document.getElementsByClassName("stopText").forEach(each => {each.classList.remove('hidden')});
+		// document.getElementsByClassName("stopText").forEach(each => {each.classList.add('visible')});
 	};
 
 	handleClosestStop = (closestStop,closestStopShort) => {
 		this.setState({ stop: closestStop, stop_id: closestStopShort, geo_located: true});
+		document.getElementsByClassName("trips")[0].classList.remove('hidden');
+		document.getElementsByClassName("trips")[0].classList.add('visible');
+		console.dir(document.getElementsByClassName("stopText"))
+		document.getElementsByClassName("stopText")[0].classList.remove('hidden');
+		document.getElementsByClassName("stopText")[0].classList.add('visible');
+		document.getElementsByClassName("stopText")[1].classList.remove('hidden');
+		document.getElementsByClassName("stopText")[1].classList.add('visible');
+		// document.getElementsByClassName("stopText").forEach(each => {each.classList.remove('hidden')});
+		// document.getElementsByClassName("stopText").forEach(each => {each.classList.add('visible')});
 	};
 
 	handlePredictedSchedule = (predicted_schedule) => {
 		this.setState({ predicted_schedule: predicted_schedule});
 	};
 
+	// let pulldownItems = document.querySelectorAll(".dropdown-item")
+	// pulldownItems.forEach(selection => selection.addEventListener("click",  e => {console.log("hi")}))
 
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.line}
 				<LineSelector
 					line={this.state.line}
 					handleLineSelector={this.handleLineSelector}
@@ -71,7 +93,7 @@ export default class App extends Component {
 				<StopSelector
 					line={this.state.line}
 					handleStopSelector={this.handleStopSelector}
-					className = "child"
+					className = "child hidden"
 				/>
 				{/* I need to return the selected stop ID here*/}
 				{/* make a parser for this url to make a name:id array periodically */}
@@ -84,13 +106,13 @@ export default class App extends Component {
 					handleClosestStop={this.handleClosestStop}
 					geo_located={this.state.geo_located}
 					stop={this.state.stop}
-					className="child"
+					className="child hidden"
 				/>
 
 				<PredictedSchedule
 				stop_id={this.state.stop_id}
 				handlePredictedSchedule={this.handlePredictedSchedule}
-				className = "child"
+				className = "child hidden"
 				/>
 				{/* {this.state.predicted_schedule} */}
 

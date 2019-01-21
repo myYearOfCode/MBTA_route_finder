@@ -20,7 +20,7 @@ export default class GeoLoc extends Component {
 		return (
 			<React.Fragment>
 				<button onClick={this.geoLocate}>GeoLocate Me</button>
-				<div id="closestStop">{out_string}</div>
+				<div id="closestStop" className="stopText hidden">{out_string}</div>
 			</React.Fragment>
 		)
 	};
