@@ -83,12 +83,12 @@ export default class App extends Component {
 				<LineSelector
 					line = {this.state.line}
 					handleLineSelector = {this.handleLineSelector}
-					className = "child"
+					className = "child pulldown"
 				/>
 				<StopSelector
 					line = {this.state.line}
 					handleStopSelector = {this.handleStopSelector}
-					className = "child hidden"
+					className = "child hidden pulldown"
 				/>
 
 				<GeoLoc

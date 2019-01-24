@@ -74,9 +74,10 @@ export default class StopSelector extends Component {
 
 	render() {
 		return (
+			<div className = "pulldown">
 			<select
 				name="Stops"
-				className="stopList hidden"
+				className="stopList hidden pulldown"
 				onChange={event =>
 					// this.props.handleStopSelector(event.target.value)
 					{
@@ -89,6 +90,7 @@ export default class StopSelector extends Component {
 			>
 				{this.state.stops}
 			</select>
+		</div>
 		);
 	}
 }

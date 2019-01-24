@@ -12,15 +12,24 @@ export default class GeoLoc extends Component {
 
 	render() {
 		if (this.props.geo_located) {
-			var out_string = `This stop closest to you is ${this.state.closestStop}`
+			var out_string_text = `This stop closest to you is `
+			var out_string_station = this.state.closestStop
 		}
 		else {
-			var out_string = `You have selected: ${this.props.stop}`
+			var out_string_text = `You have selected: `
+			var out_string_station = this.state.stop
 		}
 		return (
 			<React.Fragment>
 				<button onClick={this.geoLocate}>GeoLocate Me</button>
-				<div id="closestStop" className="stopText hidden station">{out_string}</div>
+				<div className = "stopText hidden">
+					<div id="closestStop" className="">
+						{out_string_text}
+					</div>
+					<div id="closestStop" className="station">
+						{out_string_station}
+					</div>
+				</div>
 			</React.Fragment>
 		)
 	};

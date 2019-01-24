@@ -31,13 +31,15 @@ export default class LineSelector extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div>
+				<div
+					classList="pulldown">
 					<select
 						name="Lines"
 						onChange={event =>
 							this.props.handleLineSelector(event.target.value)
 						}
 						value={this.props.line}
+
 
 					>
 						<option value="Blue">Blue</option>

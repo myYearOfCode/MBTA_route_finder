@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-  height: 300px;
+  height: 100vh;
 	padding-top: 50px;
 }
 
@@ -22,8 +22,17 @@
 	padding: 4px;
 }
 .station {
-	padding-top: 50px;
 	font-weight: 900;
+	font-size: 100px;
+}
+
+button {
+	padding: 2px;
+}
+
+.pulldown {
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 
 .direction {
@@ -50,7 +59,3 @@
   opacity: 1;
   transition: opacity 2s linear;
 }
-/*div:nth-child(even) {
-	background: #eee;
-}
-*/
