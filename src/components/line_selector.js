@@ -32,7 +32,7 @@ export default class LineSelector extends Component {
 		return (
 			<React.Fragment>
 				<div
-					classList="pulldown">
+					className="pulldown">
 					<select
 						name="Lines"
 						onChange={event =>

@@ -78,6 +78,7 @@ export default class App extends Component {
 	};
 
 	render() {
+
 		return (
 			<React.Fragment>
 				<LineSelector
@@ -92,11 +93,10 @@ export default class App extends Component {
 				/>
 
 				<GeoLoc
-					className="geoloc"
 					handleClosestStop = {this.handleClosestStop}
 					geo_located = {this.state.geo_located}
 					stop = {this.state.stop}
-					className="child hidden"
+					className="child hidden geoloc"
 				/>
 
 				<PredictedSchedule
