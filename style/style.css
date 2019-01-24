@@ -21,6 +21,23 @@
 	text-align: right;
 	padding: 4px;
 }
+.station {
+	padding-top: 50px;
+	font-weight: 900;
+}
+
+.direction {
+	padding-top: 10px;
+	font-weight: 600;
+}
+
+.arrivals {
+	padding-left: 25px;
+}
+
+.trips {
+	padding-left: 10px;
+}
 
 .hidden {
   visibility: hidden;
