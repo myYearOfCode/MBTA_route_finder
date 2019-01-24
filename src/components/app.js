@@ -58,8 +58,8 @@ export default class App extends Component {
 		console.dir(stopTextElements)
 		stopTextElements[0].classList.remove('hidden');
 		stopTextElements[0].classList.add('visible');
-		stopTextElements[1].classList.remove('hidden');
-		stopTextElements[1].classList.add('visible');
+		// stopTextElements[1].classList.remove('hidden');
+		// stopTextElements[1].classList.add('visible');
 	};
 
 	handleClosestStop = (closestStop,closestStopShort) => {
@@ -101,6 +101,7 @@ export default class App extends Component {
 
 				<PredictedSchedule
 				stop_id = {this.state.stop_id}
+				stop = {this.state.stop}
 				line = {this.state.line}
 				handlePredictedSchedule = {this.handlePredictedSchedule}
 				className = "child hidden"

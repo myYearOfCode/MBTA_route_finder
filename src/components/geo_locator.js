@@ -5,19 +5,20 @@ export default class GeoLoc extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stops: "",
+			stop: "testing",
 			closestStop: "",
 		};
 	}
 
 	render() {
+		console.log(`geolocated is ${this.props.geo_located}`)
 		if (this.props.geo_located) {
-			var out_string_text = `This stop closest to you is `
+			var out_string_text = `This stop closest to you is: `
 			var out_string_station = this.state.closestStop
 		}
 		else {
 			var out_string_text = `You have selected: `
-			var out_string_station = this.state.stop
+			var out_string_station = this.props.stop
 		}
 		return (
 			<React.Fragment>
