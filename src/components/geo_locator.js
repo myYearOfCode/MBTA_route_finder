@@ -20,7 +20,7 @@ export default class GeoLoc extends Component {
 		return (
 			<React.Fragment>
 				<button onClick={this.geoLocate}>GeoLocate Me</button>
-				<div id="closestStop" className="stopText hidden">{out_string}</div>
+				<div id="closestStop" className="stopText hidden station">{out_string}</div>
 			</React.Fragment>
 		)
 	};
@@ -73,31 +73,6 @@ export default class GeoLoc extends Component {
 		this.props.handleClosestStop(mydata[0].stop_name,mydata[0].parent_station)
 		return mydata[0].stop_name;
 	}
-
-	// lookUpStopName = (stop) => {
-	// 	// returns the stop object when given the stop name.
-	// 	// maybe a key : object pair would be more performant.
-	// 	let mydata = JSON.parse(data);
-	// 	for (let i = 0; i < mydata.length; i++) {
-	// 		if (stop === mydata[i].stop_name) {
-	// 			// console.log(mydata[i]);
-	// 		}
-	// 	}
-	// }
-
-	// returnStopsFromLine = (line) => {
-	// 	//returns the stops on a line
-	// 	//for use in building a selector.
-	// 	let mydata = JSON.parse(data);
-	// 	let term = RegExp(line + " Line");
-	//
-	// 	for (let i = 0; i < mydata.length; i++) {
-	// 		if (term.test(mydata[i].stop_desc)) {
-	// 			console.log(mydata[i].stop_desc, mydata[i].stop_id);
-	// 		}
-	// 	}
-	// 	console.log(term);
-	// }
 }
 
 

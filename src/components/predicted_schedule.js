@@ -35,7 +35,7 @@ export default class PredictedSchedule extends Component {
 		// console.log(typeof nextProps)
 
 		// console.log(`predicted schedule has received ${nextProps.stop_id}`)
-
+		this.setDirectionLabels(this.props.line)
 		if (typeof nextProps !== "undefined" && this.state.stop_id !== nextProps.stop_id){
 			// maybe I should make this a better test to see if it actually needs a rerender.
 			// console.log("stop id = " + this.state.stop_id)
@@ -106,12 +106,43 @@ export default class PredictedSchedule extends Component {
 		}
 	}
 
+  setDirectionLabels(line){
+		switch (line) {
+			case "Orange":
+			case "Green-B":
+			case "Green-C":
+			case "Green-D":
+			case "Green-E":
+				this.setState({ line_zero: "West" })
+				this.setState({ line_one: "East" })
+				break;
+			case "Red":
+			case "Blue":
+				this.setState({ line_zero: "South" })
+				this.setState({ line_one: "North" })
+				break;
+		}
+	}
 	render() {
 
 		return (
 			<React.Fragment>
-				<div className="trips hidden"> Direction One: {this.state.dir_one_times}</div>
-				<div className="trips hidden"> Direction Zero: {this.state.dir_zero_times}</div>
+				<div className="trips hidden">
+					<div className="direction">
+						{this.state.line_zero}:
+					</div>
+					<div className="arrivals">
+						{this.state.dir_one_times}
+					</div>
+				</div>
+				<div className="trips hidden">
+					<div className="direction">
+						{this.state.line_one}:
+					</div>
+					<div className="arrivals">
+						{this.state.dir_zero_times}
+					</div>
+				</div>
 			</React.Fragment>
 		);
 	}
