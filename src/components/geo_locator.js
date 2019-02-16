@@ -11,26 +11,9 @@ export default class GeoLoc extends Component {
 	}
 
 	render() {
-		console.log(`geolocated is ${this.props.geo_located}`)
-		if (this.props.geo_located) {
-			var out_string_text = `This stop closest to you is: `
-			var out_string_station = this.state.closestStop
-		}
-		else {
-			var out_string_text = `You have selected: `
-			var out_string_station = this.props.stop
-		}
 		return (
 			<React.Fragment>
 				<button onClick={this.geoLocate}>GeoLocate Me</button>
-				<div className = "stopText hidden">
-					<div id="closestStop" className="">
-						{out_string_text}
-					</div>
-					<div id="closestStop" className="station">
-						{out_string_station}
-					</div>
-				</div>
 			</React.Fragment>
 		)
 	};
@@ -51,7 +34,7 @@ export default class GeoLoc extends Component {
 	}
 
 	// take the users position and finds distance to each of the stops.
-	// take a few seconds to return a 254 element array.
+	// it takes a few seconds to return a 254 element array.
 	findClosestStop = (position) => {
 		this.props.handleClosestStop("loading", "loading")
 

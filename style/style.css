@@ -4,7 +4,29 @@
 	align-items: stretch;
   height: 100vh;
 	padding-top: 50px;
-	max-width: 30vw;
+	max-width: 40vw;
+}
+
+body {
+	background-image: url(/images/MBTA.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:100%;
+	/* filter: brightness(1.5) */
+	/* transform: rotate(20deg); */
+}
+
+.outer {
+
+}
+
+.inner {
+	max-height: 75vh;
+	border: 2px solid black;
+	border-radius: 46px;
+	background-color: white;
+	background-blend-mode: lighten;
+
 }
 
 .child {
@@ -13,15 +35,6 @@
   margin: auto;
 }
 
-/* .leftColumn {
-	flex: 70%;
-	padding: 4px;
-}
-.rightColumn {
-	flex: 30%;
-	text-align: right;
-	padding: 4px;
-} */
 .station {
 	font-weight: 900;
 	font-size: 100px;

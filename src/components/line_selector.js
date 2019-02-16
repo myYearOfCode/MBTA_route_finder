@@ -42,7 +42,7 @@ export default class LineSelector extends Component {
 
 
 					>
-						<option value="Select a line">Select a line</option>
+						{/* <option value="Select a line">Select a line</option> */}
 						<option value="Blue">Blue</option>
 						<option value="Green-B">Green B</option>
 						<option value="Green-C">Green C</option>
