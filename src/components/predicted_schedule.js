@@ -30,10 +30,7 @@ export default class PredictedSchedule extends Component {
 	componentWillReceiveProps(nextProps) {
 		// example call
 		// https://api-v3.mbta.com/predictions?filter[stop]=place-portr
-		// I need to get time in a usable format and then sort by current time.
-		// then display the 3 closest trains in each direction.
-		// console.log(typeof nextProps)
-
+		this.setState({stop: this.props.stop})
 		// console.log(`predicted schedule has received ${nextProps.stop_id}`)
 		this.setDirectionLabels(this.props.line)
 		if (typeof nextProps !== "undefined" && this.state.stop_id !== nextProps.stop_id){
@@ -56,6 +53,7 @@ export default class PredictedSchedule extends Component {
 								direction={trip.attributes.direction_id}
 								id={trip.id}
 								key={trip.id}
+								line={trip.relationships.route.data.id}
 							>
 								{trip.id}
 							</div>
@@ -66,8 +64,11 @@ export default class PredictedSchedule extends Component {
 					// console.log(trips)
 					nextProps.handlePredictedSchedule(trips) // passes trips up. useful?
 					let maxLength = 3
-					let dir_one_array = trips.filter( trip => trip.props.direction == 1);
-					let dir_zero_array = trips.filter( trip => trip.props.direction == 0);
+					let dir_one_array = trips.filter( trip => trip.props.direction == 1).filter( trip => trip.props.line == this.props.line);
+					// filter again here by {trip.props.line}
+					let dir_zero_array = trips.filter( trip => trip.props.direction == 0).filter( trip => trip.props.line == this.props.line);
+					console.log(dir_one_array)
+					// filter again here by {trip.props.line}
 					let dir_one_times = dir_one_array.slice(0,maxLength).map( trip => {
 						return (this.doTimeMath(trip, timeNow))
 					})
@@ -76,14 +77,21 @@ export default class PredictedSchedule extends Component {
 						return (this.doTimeMath(trip, timeNow))
 					})
 
-					this.setState({dir_one_array: dir_one_array, dir_zero_array: dir_zero_array, dir_zero_times: dir_zero_times, dir_one_times: dir_one_times})
+					this.setState({
+						dir_one_array: dir_one_array,
+						dir_zero_array: dir_zero_array,
+					  dir_zero_times: dir_zero_times,
+						dir_one_times: dir_one_times
+					})
 			});
 		}
 	}
 
 	doTimeMath(trip, timeNow){
+		console.dir(trip)
 		try {
 			let waitTime = Math.round((Date.parse(trip.props.time) - timeNow) / 60000)
+			console.log(trip.props.time)
 			if (waitTime > 0) {
 				return (
 					<div key = {trip.props.time}>
@@ -92,8 +100,10 @@ export default class PredictedSchedule extends Component {
 				)
 			}
 			else {
+				console.dir(trip.id)
+				//trip.relationships.trip.data.id
 				return (
-					<div key = {trip.props.time}>
+					<div key = {trip.props.id}>
 						{"At station."}
 					</div>
 				)
@@ -101,8 +111,6 @@ export default class PredictedSchedule extends Component {
 		} catch (e) {
 			console.log('error accessing trip.props.time')
 			console.log(e)
-		} finally {
-
 		}
 	}
 
@@ -124,26 +132,45 @@ export default class PredictedSchedule extends Component {
 		}
 	}
 	render() {
+		if (this.props.geo_located) {
+			var out_string_text = `The stop closest to you is: `
+		}
+		else {
+			var out_string_text = `You have selected: `
+		}
+
+		var out_string_station = this.props.stop
 
 		return (
-			<React.Fragment>
-				<div className="trips hidden">
-					<div className="direction">
+			<div className = "schedule hidden">
+				<div className = "stopText">
+					<div id="closestStop" className="">
+						{out_string_text}
+					</div>
+					<div id="closestStop" className="station">
+						{out_string_station}
+					</div>
+				</div>
+
+				<div id="dir_one_outer" className="trips">
+					<div id="dir_one" className="direction">
 						{this.state.line_zero}:
 					</div>
 					<div className="arrivals">
 						{this.state.dir_one_times}
 					</div>
 				</div>
-				<div className="trips hidden">
-					<div className="direction">
+
+				<div id="dir_two_outer" className="trips">
+					<div id="dir_two" className="direction">
 						{this.state.line_one}:
 					</div>
 					<div className="arrivals">
 						{this.state.dir_zero_times}
 					</div>
 				</div>
-			</React.Fragment>
+
+			</div>
 		);
 	}
 }
