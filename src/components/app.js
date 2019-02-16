@@ -38,6 +38,7 @@ export default class App extends Component {
 		this.handleStopSelector = this.handleStopSelector.bind(this);
 		this.handleLineSelector = this.handleLineSelector.bind(this);
 		this.handleClosestStop = this.handleClosestStop.bind(this);
+		this.handlePredictedSchedule = this.handlePredictedSchedule.bind(this);
 	}
 
 	handleLineSelector = line => {
@@ -54,7 +55,7 @@ export default class App extends Component {
 		document.getElementsByClassName("trips")[0].classList.add('visible');
 		document.getElementsByClassName("trips")[1].classList.remove('hidden');
 		document.getElementsByClassName("trips")[1].classList.add('visible');
-		let stopTextElements = document.getElementsByClassName("stopText")
+		let stopTextElements = document.getElementsByClassName("schedule")
 		console.dir(stopTextElements)
 		stopTextElements[0].classList.remove('hidden');
 		stopTextElements[0].classList.add('visible');
@@ -69,8 +70,8 @@ export default class App extends Component {
 		document.getElementsByClassName("trips")[1].classList.remove('hidden');
 		document.getElementsByClassName("trips")[1].classList.add('visible');
 		console.dir(document.getElementsByClassName("stopText"))
-		document.getElementsByClassName("stopText")[0].classList.remove('hidden');
-		document.getElementsByClassName("stopText")[0].classList.add('visible');
+		document.getElementsByClassName("schedule")[0].classList.remove('hidden');
+		document.getElementsByClassName("schedule")[0].classList.add('visible');
 	};
 
 	handlePredictedSchedule = (predicted_schedule) => {
@@ -86,6 +87,7 @@ export default class App extends Component {
 					handleLineSelector = {this.handleLineSelector}
 					className = "child pulldown"
 				/>
+				
 				<StopSelector
 					line = {this.state.line}
 					handleStopSelector = {this.handleStopSelector}
@@ -100,11 +102,13 @@ export default class App extends Component {
 				/>
 
 				<PredictedSchedule
-				stop_id = {this.state.stop_id}
-				stop = {this.state.stop}
-				line = {this.state.line}
-				handlePredictedSchedule = {this.handlePredictedSchedule}
-				className = "child hidden"
+					stop_id = {this.state.stop_id}
+					stop = {this.state.stop}
+					line = {this.state.line}
+					geo_located = {this.state.geo_located}
+					closestStop = {this.state.closestStop}
+					handlePredictedSchedule = {this.handlePredictedSchedule}
+					className = "child hidden"
 				/>
 			</React.Fragment>
 		);
