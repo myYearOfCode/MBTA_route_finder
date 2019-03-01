@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import AllLines from "./all_lines";
+import GeoLoc from "./geo_locator";
 import GetSchedule from "./get_schedule";
+import LineSelector from "./line_selector";
+import MBTALogo from "./MBTA_logo"
+import PredictedSchedule from "./predicted_schedule";
 import SearchBar from "./search_bar";
 import StopSelector from "./stop_selector";
-import AllLines from "./all_lines";
-import PredictedSchedule from "./predicted_schedule";
-import LineSelector from "./line_selector";
-import GeoLoc from "./geo_locator";
 
 // TODO:
 // make the stop selector and line selector controlled components
@@ -82,12 +83,14 @@ export default class App extends Component {
 
 		return (
 			<React.Fragment>
+				<MBTALogo
+				line = {this.state.line}
+				/>
 				<LineSelector
 					line = {this.state.line}
 					handleLineSelector = {this.handleLineSelector}
 					className = "child pulldown"
 				/>
-				
 				<StopSelector
 					line = {this.state.line}
 					handleStopSelector = {this.handleStopSelector}

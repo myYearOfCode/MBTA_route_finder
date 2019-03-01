@@ -8,10 +8,10 @@
 }
 
 body {
-	background-image: url(/images/MBTA.svg);
+	/* background-image: url(/images/MBTA.svg);
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size:100%;
+	background-size:100%; */
 	/* filter: brightness(1.5) */
 	/* transform: rotate(20deg); */
 }
@@ -24,9 +24,9 @@ body {
 	max-height: 75vh;
 	border: 2px solid black;
 	border-radius: 46px;
-	background-color: white;
-	background-blend-mode: lighten;
-
+	/* background-color: white;
+	background-blend-mode: lighten; */
+	box-shadow: 10px 10px 15px grey;
 }
 
 .child {
