@@ -35,6 +35,14 @@ body {
   margin: auto;
 }
 
+/* .logo {
+	flex-grow: 1;
+	align-self: flex-start;
+} */
+
+.empty {
+	flex-grow: 1;
+}
 .station {
 	font-weight: 900;
 	font-size: 100px;

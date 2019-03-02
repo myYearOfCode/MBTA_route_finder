@@ -31,7 +31,7 @@ export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			line: "Red",
+			line: "Select_A_Line",
 			stop: "",
 			stop_id: "",
 			geo_located: false
@@ -113,6 +113,7 @@ export default class App extends Component {
 					handlePredictedSchedule = {this.handlePredictedSchedule}
 					className = "child hidden"
 				/>
+				<div className = "empty"></div>
 			</React.Fragment>
 		);
 	}

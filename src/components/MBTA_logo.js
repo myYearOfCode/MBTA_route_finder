@@ -11,26 +11,29 @@ export default class MBTALogo extends Component {
 
   componentWillReceiveProps(nextProps){
     let lineColors = {
-      Red: '#C80000',
-      Orange: '#FE6700',
+      Red: '#FA2D27',
+      Orange: '#FD8A03',
       Green: '#11773C',
-      'Green-B': '#11773C',
-      'Green-C': '#11773C',
-      'Green-D': '#11773C',
-      'Green-E': '#11773C',
-      Blue: '#00009C',
-      Silver: '#8D8787',
+      'Green-B': '#008150',
+      'Green-C': '#008150',
+      'Green-D': '#008150',
+      'Green-E': '#008150',
+      Blue: '#2F5DA6',
+      Silver: '#9A9C9D',
       Rail: '#B60EA0',
-      Boats: '#0066FF'
+      Boats: '#0066FF',
+      Select_A_Line: '#000'
     }
     this.setState({line: nextProps.line, logoColor: lineColors[nextProps.line]})
   }
 
+  // hmmm this isn't working very well.
+  // not responsive. or good looking.
   render () {
     console.log(this.state.logoColor)
     return(
       <React.Fragment>
-        <svg viewBox="500 0 1000 1000" width="100vw" height="100vw">
+        <svg viewBox="0 0 600 500" width="100%" height="100%">
           <svg className = "logo" xmlns="http://www.w3.org/2000/svg" version="1.0"  >
             <circle cx="250" cy="250" r="239" stroke={`${this.state.logoColor}`} strokeWidth="22" fill="#fff"/>
             <path d="M92,138.5h316v79.5h-118.25v194h-79.5v-194h-118.25z" fill= {`${this.state.logoColor}`}/>
