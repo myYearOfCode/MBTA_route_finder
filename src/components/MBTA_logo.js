@@ -33,12 +33,14 @@ export default class MBTALogo extends Component {
     console.log(this.state.logoColor)
     return(
       <React.Fragment>
-        <svg viewBox="0 0 600 500" width="100%" height="100%">
-          <svg className = "logo" xmlns="http://www.w3.org/2000/svg" version="1.0"  >
+      <div className = "logo">
+        <svg viewBox="-50 0 600 500" width="100%" height="100%">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.0"  >
             <circle cx="250" cy="250" r="239" stroke={`${this.state.logoColor}`} strokeWidth="22" fill="#fff"/>
             <path d="M92,138.5h316v79.5h-118.25v194h-79.5v-194h-118.25z" fill= {`${this.state.logoColor}`}/>
           </svg>
         </svg>
+        </div>
       </React.Fragment>
     )
   }

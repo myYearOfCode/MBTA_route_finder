@@ -1,31 +1,18 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	align-items: stretch;
-  height: 100vh;
+	/* align-items: stretch;
+  height: 100vh; */
 	padding-top: 50px;
 	max-width: 40vw;
 }
 
-body {
-	/* background-image: url(/images/MBTA.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size:100%; */
-	/* filter: brightness(1.5) */
-	/* transform: rotate(20deg); */
-}
-
-.outer {
-
-}
-
 .inner {
-	max-height: 75vh;
+	/* max-height: 75vh; */
 	border: 2px solid black;
 	border-radius: 46px;
-	/* background-color: white;
-	background-blend-mode: lighten; */
+	padding-top: 10px;
+	padding-bottom: 20px;
 	box-shadow: 10px 10px 15px grey;
 }
 
@@ -35,19 +22,30 @@ body {
   margin: auto;
 }
 
-/* .logo {
-	flex-grow: 1;
-	align-self: flex-start;
-} */
-
-.empty {
-	flex-grow: 1;
+svg {
+	margin: auto;
+	max-width: 200px;
 }
+
+.logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	padding-bottom: 10px;
+	/* flex-grow: 1;
+	align-self: center;
+	height: 30vw;
+	margin: auto; */
+}
+
 .station {
 	font-weight: 900;
-	font-size: 100px;
-	margin-top: -20px;
-	margin-bottom: -25px;
+	font-size: 40px;
+	/* margin-top: -20px;
+	margin-bottom: -25px; */
+	/* overflow: hidden; */
+	text-overflow: ellipsis; // This is where the magic happens
 }
 
 button {
@@ -83,3 +81,20 @@ button {
   opacity: 1;
   transition: opacity 2s linear;
 }
+
+@media only screen and (max-width: 940px) {
+	.container {
+		display: flex;
+		flex-direction: column;
+		padding-top: 50px;
+		min-width: 350px;
+	}
+
+	.inner {
+		padding-top: 10px;
+	}
+
+	body {
+		background-color: '#000';
+	}
+ }
